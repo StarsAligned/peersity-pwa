@@ -1,27 +1,31 @@
 {
-  "name": "peersity-pwa",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.2.4"
-  },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "15.2.4",
-    "@eslint/eslintrc": "^3"
-  }
+	"name": "peersity-pwa",
+	"version": "0.1.0",
+	"private": true,
+	"author": {
+		"name": "Stars Aligned",
+		"url": "https://github.com/StarsAligned"
+	},
+	"scripts": {
+		"dev": "next dev --turbopack --port 10401",
+		"build": "next build",
+		"start": "next start --port 10401",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"react": "19.1.0",
+		"react-dom": "19.1.0",
+		"next": "15.2.4"
+	},
+	"devDependencies": {
+		"typescript": "5.8.2",
+		"@types/node": "22.14.0",
+		"@types/react": "19.1.0",
+		"@types/react-dom": "19.1.1",
+		"@tailwindcss/postcss": "4.1.2",
+		"tailwindcss": "4.1.2",
+		"eslint": "9.23.0",
+		"eslint-config-next": "15.2.4",
+		"@eslint/eslintrc": "3.3.1"
+	}
 }

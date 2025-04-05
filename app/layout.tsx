@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavigationLinksList from "@/components/shared/layout/navigation-links-list";
-import UserInfo from "@/components/auth/user-info";
+import UserInfo from "@/components/portal/auth/user-info";
 import { Suspense } from "react";
 import { ThemeProvider } from "next-themes";
 import ThemeButton from "@/components/shared/layout/theme-button";
@@ -20,6 +20,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
 	title: "PEERSITY",
 	description: "Learning resources recommendations and reviews.",
+	icons: {
+		icon: "/icons/peersity-logo.svg",
+	},
 };
 
 export default function RootLayout({

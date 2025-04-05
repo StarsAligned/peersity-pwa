@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import getCurrentUser from "@/lib/auth/functions/user";
-import type UserInfo from "@/lib/auth/models/user";
+import getCurrentUser from "@/lib/portal/functions/user";
+import type UserInfo from "@/lib/portal/models/user";
 
 export default function UserInfo() {
 	const [user, setUser] = useState<UserInfo | null>(null);

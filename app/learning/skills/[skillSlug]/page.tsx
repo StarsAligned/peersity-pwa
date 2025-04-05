@@ -3,7 +3,7 @@ import SkillListItem from "@/lib/learning/models/skill";
 export default async function SkillPage({ params }: Readonly<{ params: Promise<Params> }>) {
 	const { skillSlug } = await params;
 
-	const data = await fetch('http://localhost:10402/skill', {
+	const data = await fetch('http://localhost:10402/learning/skill', {
 		cache: 'force-cache',
 	})
 	const skills: SkillListItem[] = await data.json()
@@ -22,7 +22,7 @@ type Params = {
 };
 
 export async function generateStaticParams() {
-	const data = await fetch('http://localhost:10402/skill', {
+	const data = await fetch('http://localhost:10402/learning/skill', {
 		cache: 'force-cache',
 	})
 	const skills: SkillListItem[] = await data.json()
@@ -35,7 +35,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Readonly<{ params: Promise<Params> }>) {
 	const { skillSlug } = await params;
 
-	const data = await fetch('http://localhost:10402/skill', {
+	const data = await fetch('http://localhost:10402/learning/skill', {
 		cache: 'force-cache',
 	})
 	const skills: SkillListItem[] = await data.json()

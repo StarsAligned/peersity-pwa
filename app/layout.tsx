@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavigationLinksList from "@/components/shared/layout/navigation-links-list";
+import UserInfo from "@/components/auth/user-info";
+import { Suspense } from "react";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -29,6 +31,11 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
 				<NavigationLinksList />
+				___
+				<Suspense fallback={<div>Loading user...</div>}>
+					<UserInfo />
+				</Suspense>
+				___
 				{children}
 			</body>
 		</html>

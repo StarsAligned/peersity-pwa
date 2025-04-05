@@ -4,6 +4,8 @@ import "./globals.css";
 import NavigationLinksList from "@/components/shared/layout/navigation-links-list";
 import UserInfo from "@/components/auth/user-info";
 import { Suspense } from "react";
+import { ThemeProvider } from "next-themes";
+import ThemeButton from "@/components/shared/layout/theme-button";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -26,17 +28,21 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-black`}
 			>
-				<NavigationLinksList />
-				___
-				<Suspense fallback={<div>Loading user...</div>}>
-					<UserInfo />
-				</Suspense>
-				___
-				{children}
+				<ThemeProvider attribute="class">
+					<NavigationLinksList />
+					___
+					<Suspense fallback={<div>Loading user...</div>}>
+						<UserInfo />
+					</Suspense>
+					___
+					{children}
+					___
+					<ThemeButton />
+				</ThemeProvider>
 			</body>
 		</html>
 	);

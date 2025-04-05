@@ -6,6 +6,7 @@ import UserInfo from "@/components/portal/auth/user-info";
 import { Suspense } from "react";
 import { ThemeProvider } from "next-themes";
 import ThemeButton from "@/components/shared/layout/theme-button";
+import PrelineWrapper from "@/components/shared/layout/preline-wrapper";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -38,15 +39,14 @@ export default function RootLayout({
 				<ThemeProvider attribute="class">
 					<NavigationLinksList />
 					___
-					<Suspense fallback={<div>Loading user...</div>}>
-						<UserInfo />
-					</Suspense>
+					<UserInfo />
 					___
 					{children}
 					___
 					<ThemeButton />
 				</ThemeProvider>
 			</body>
+			<PrelineWrapper />
 		</html>
 	);
 }

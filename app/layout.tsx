@@ -1,21 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
-import NavigationLinksList from "@/components/shared/layout/navigation-links-list";
-import UserInfo from "@/components/portal/auth/user-info";
-import { Suspense } from "react";
 import { ThemeProvider } from "next-themes";
-import ThemeButton from "@/components/shared/layout/theme-button";
-import PrelineWrapper from "@/components/shared/layout/preline-wrapper";
+import PrelineWrapper from "@/components/shared/layout/preline/preline-wrapper";
+import Navbar from "@/components/shared/layout/navbar/navbar";
+import Footer from "@/components/shared/layout/footer/footer";
 
-const geistSans = Geist({
-	variable: "--font-geist-sans",
+const fontInter = Inter({
+	variable: "--font-inter",
 	subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-	variable: "--font-geist-mono",
-	subsets: ["latin"],
+	weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -32,18 +26,16 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html lang="en" className="h-full" suppressHydrationWarning={true}>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white dark:bg-black`}
+				className={`${fontInter.className} h-full antialiased text-neutral-900 bg-white dark:text-neutral-200 dark:bg-gray-950`}
 			>
 				<ThemeProvider attribute="class">
-					<NavigationLinksList />
-					___
-					<UserInfo />
-					___
-					{children}
-					___
-					<ThemeButton />
+					<div className="min-h-screen bg-[url('/backgrounds/shattered.webp')] dark:bg-[url('/backgrounds/shattered-dark.webp')]">
+						<Navbar />
+						{children}
+					</div>
+					<Footer />
 				</ThemeProvider>
 			</body>
 			<PrelineWrapper />

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function NavigationLinksList() {
+export default function NavbarUserLinks() {
 	const frontendHomeUrl = process.env.NEXT_PUBLIC_DOMAIN || "http://localhost:10401";
 
 	return (

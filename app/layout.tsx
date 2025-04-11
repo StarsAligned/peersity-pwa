@@ -31,7 +31,7 @@ export default function RootLayout({
 				className={`${fontInter.className} h-full antialiased text-neutral-900 bg-white dark:text-neutral-200 dark:bg-gray-950`}
 			>
 				<ThemeProvider attribute="class">
-					<div className="min-h-screen bg-[url('/backgrounds/shattered.webp')] dark:bg-[url('/backgrounds/shattered-dark.webp')]">
+					<div className="min-h-screen pb-10 bg-[url('/backgrounds/shattered.webp')] dark:bg-[url('/backgrounds/shattered-dark.webp')]">
 						<Navbar />
 						{children}
 					</div>

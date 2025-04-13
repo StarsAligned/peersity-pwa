@@ -1,20 +1,12 @@
 export default function Main({
 	children,
-	className,
-	header,
 }: Readonly<{
 	children: React.ReactNode;
-	className?: string;
-	header: React.ReactNode;
 }>) {
 	return (
 		<>
-			<header className="pb-32 shadow-sm bg-gray-800 dark:bg-gray-950">
-				<div className={`px-4 py-10 sm:px-6 lg:px-8 ${className}`}>
-					{header}
-				</div>
-			</header>
-			<main className={`-mt-32 ${className}`}>
+			<div className="h-60 shadow-sm bg-gray-800 dark:bg-gray-950"></div>
+			<main className="-mt-48 px-4 sm:px-6 lg:px-8">
 				{children}
 			</main>
 		</>

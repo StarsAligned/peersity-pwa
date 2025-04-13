@@ -16,8 +16,8 @@ export default async function SkillPage({ params }: Readonly<{ params: Promise<P
 		return redirect("/learning/skills");
 	}
 
-	const header = (
-		<>
+	return (
+		<Main>
 			<Link
 				href="/learning/skills"
 				className="text-neutral-500 hover:text-neutral-200 transition-colors"
@@ -28,11 +28,6 @@ export default async function SkillPage({ params }: Readonly<{ params: Promise<P
 			</Link>
 
 			<Title textColor={TextColorClassName.Skill}>{skill.name}</Title>
-		</>
-	);
-
-	return (
-		<Main header={header} className="mx-auto max-w-6xl">
 			<div className="px-4 sm:px-6 lg:px-8">
 				<Card>
 					<p>{skill.description}</p>
@@ -64,5 +59,3 @@ export async function generateMetadata({ params }: Readonly<{ params: Promise<Pa
 		description: skill?.description,
 	};
 }
-
-

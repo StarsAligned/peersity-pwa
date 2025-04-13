@@ -3,4 +3,5 @@ export default interface SkillListItem {
 	slug: string;
 	name: string;
 	description: string;
+	icon: string;
 }

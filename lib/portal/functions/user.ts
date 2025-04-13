@@ -11,5 +11,10 @@ export default async function getCurrentUser(): Promise<AuthUser | null> {
 	}
 
 	const userCurrent: AuthUser = await response.json();
+
+	if (!userCurrent || userCurrent.code === "") {
+		return null;
+	}
+
 	return userCurrent;
 }

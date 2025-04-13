@@ -39,7 +39,7 @@ export default function SkillsGridSearch({
 				</div>
 			</div>
 
-			<div className="mt-12 grid sm:grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-3 sm:gap-6">
+			<div className="mt-12 grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-3 sm:gap-6">
 				{filteredSkills.map((skill) => {
 					return (
 						<a

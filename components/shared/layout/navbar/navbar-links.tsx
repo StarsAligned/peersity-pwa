@@ -2,14 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LucideIcon, Newspaper, BookUp2 } from "lucide-react";
+import { LucideIcon, BookUp2 } from "lucide-react";
 
 export default function NavbarLinks({ mobile }: { mobile?: boolean }) {
 	return (
 		<>
-			<NavbarLink href="/" icon={Newspaper} mobile={mobile}>
-				Timeline
-			</NavbarLink>
 			<NavbarLink href="/learning/skills" icon={BookUp2} mobile={mobile}>
 				Skills
 			</NavbarLink>

@@ -3,6 +3,7 @@ import Header from "@/components/shared/page/header";
 import Main from "@/components/shared/page/main";
 import Title from "@/components/shared/page/title";
 import { TextColorClassName } from "@/lib/shared/colors";
+import { Suspense } from "react";
 
 export default function SkillsPage() {
 	return (
@@ -13,7 +14,9 @@ export default function SkillsPage() {
 				</Title>
 			</Header>
 
-			<SkillsPageContent />
+			<Suspense>
+				<SkillsPageContent />
+			</Suspense>
 		</Main>
 	);
 }

@@ -11,7 +11,7 @@ export default function Overline({
 	icon?: LucideIcon;
 }>) {
 	return (
-		<div className={`text-sm font-medium ${textColor} flex items-center gap-1`}>
+		<div className={`mb-3 font-medium flex items-center gap-1 ${textColor}`}>
 			{Icon && <Icon size={16} className="inline-block" />}
 			<span>{children}</span>
 		</div>

@@ -7,6 +7,8 @@ import { redirect } from "next/navigation";
 import { BookUp2 } from "lucide-react";
 import Overline from "@/components/shared/page/overline";
 import Link from "next/link";
+import Header from "@/components/shared/page/header";
+import DynamicIcon from "@/components/shared/dynamic-icon";
 
 export default async function SkillPage({ params }: Readonly<{ params: Promise<Params> }>) {
 	const { skillSlug } = await params;
@@ -18,21 +20,25 @@ export default async function SkillPage({ params }: Readonly<{ params: Promise<P
 
 	return (
 		<Main>
-			<Link
-				href="/learning/skills"
-				className="text-neutral-500 hover:text-neutral-200 transition-colors"
-			>
-				<Overline icon={BookUp2}>
-					Skill
-				</Overline>
-			</Link>
+			<Header className="mx-auto max-w-6xl">
+				<Link
+					href="/learning/skills"
+					className="text-neutral-500 hover:text-neutral-200 transition-colors"
+				>
+					<Overline icon={BookUp2}>
+						Skill
+					</Overline>
+				</Link>
 
-			<Title textColor={TextColorClassName.Skill}>{skill.name}</Title>
-			<div className="px-4 sm:px-6 lg:px-8">
-				<Card>
-					<p>{skill.description}</p>
-				</Card>
-			</div>
+				<Title textColor={TextColorClassName.Skill}>
+					<DynamicIcon name={skill.icon} size={36} className="text-violet-500" />
+					{skill.name}
+				</Title>
+			</Header>
+
+			<Card className="mx-auto max-w-6xl">
+				<p className="text-sm">{skill.description}</p>
+			</Card>
 		</Main>
 	);
 }

@@ -17,42 +17,66 @@ export default function UserMenu({ mobile }: { mobile?: boolean }) {
 
 	useEffect(() => {
 		async function fetchUser() {
+			setLoading(true);
 			try {
 				const currentUser = await getCurrentUser();
 				setUser(currentUser);
 			} catch (error) {
 				console.error("Error fetching user", error);
+				setUser(null);
+			} finally {
+				setLoading(false);
 			}
-			setLoading(false);
 		}
 		fetchUser();
 	}, []);
 
+	useEffect(() => {
+		if (!loading && user && user.code !== "" && !mobile) {
+			const timer = setTimeout(() => {
+				if (window.HSStaticMethods && typeof window.HSStaticMethods.autoInit === 'function') {
+					window.HSStaticMethods.autoInit(['dropdown']);
+				}
+			}, 0);
+
+			return () => clearTimeout(timer);
+		}
+	}, [user, loading, mobile]);
+
 	if (loading) {
 		return (
-			<div className={`${mobile ? "ml-3" : ""} animate-spin inline-block size-6 border-3 border-current border-t-transparent text-blue-600 rounded-full dark:text-blue-500`} role="status" aria-label="loading">
+			<div className={`${mobile ? "ml-3" : ""} animate-spin inline-block size-6 border-[3px] border-current border-t-transparent rounded-full text-blue-500`} role="status" aria-label="loading">
 				<span className="sr-only">Loading...</span>
 			</div>
 		);
 	}
 
-	if (!user || user.code === "Anonymous" || loading) {
-		return (
-			<>
-				<Link
-					href={`${apiUrl}/portal/auth/github/login?redirect=${encodeURIComponent(
-						homeUrl
-					)}`}
-					onClick={() => setLoading(true)}
-					type="button"
-					className={`${mobile ? "ml-3" : ""} py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-transparent focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none 
-						text-white ${BackgroundColorClassName.Social} ${HoverBackgroundColorClassName.Social}`}
-				>
-					Login
-				</Link>
-				{mobile && <ThemeButton mobile />}
-			</>
+	const isLoggedIn = user && user.code !== "";
+
+	if (!isLoggedIn) {
+		const loginUrl = `${apiUrl}/portal/auth/github/login?redirect=${encodeURIComponent(homeUrl)}`;
+		const loginButton = (
+			<Link
+				href={loginUrl}
+				onClick={() => setLoading(true)}
+				type="button"
+				className={`py-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-full border border-transparent focus:outline-hidden disabled:opacity-50 disabled:pointer-events-none text-white
+          				${BackgroundColorClassName.Social} ${HoverBackgroundColorClassName.Social}`}
+			>
+				Login
+			</Link>
 		);
+
+		if (mobile) {
+			return (
+				<div className="px-3 flex w-full items-center justify-between">
+					{loginButton}
+					<ThemeButton mobile />
+				</div>
+			);
+		} else {
+			return loginButton;
+		}
 	}
 
 	if (mobile) {
@@ -69,7 +93,7 @@ export default function UserMenu({ mobile }: { mobile?: boolean }) {
 						/>
 					</div>
 					<div className="ml-3">
-						<div className={`text-base font-medium  ${TextColorClassName.Social}`}>
+						<div className={`text-base font-medium ${TextColorClassName.Social}`}>
 							{user.name}
 						</div>
 						<div className="text-sm font-medium text-gray-400">
@@ -81,9 +105,7 @@ export default function UserMenu({ mobile }: { mobile?: boolean }) {
 				<div className="mt-3 space-y-1 px-2">
 					<Link
 						className="flex items-center rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-						href={`${apiUrl}/portal/auth/logout?redirect=${encodeURIComponent(
-							homeUrl
-						)}`}
+						href={`${apiUrl}/portal/auth/logout?redirect=${encodeURIComponent(homeUrl)}`}
 						onClick={() => setLoading(true)}
 					>
 						<LogOut className="w-5 h-5 mr-2" />
@@ -100,10 +122,9 @@ export default function UserMenu({ mobile }: { mobile?: boolean }) {
 				id="hs-dropdown-account"
 				type="button"
 				className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 hover:ring-offset-gray-800 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-gray-800"
-				aria-haspopup="menu"
-				aria-expanded="false"
-				aria-label="Dropdown"
 			>
+				<span className="absolute -inset-1.5" />
+				<span className="sr-only">Open user menu</span>
 				<Image
 					className="size-8 rounded-full shrink-0"
 					src={user.avatar_url}
@@ -129,10 +150,9 @@ export default function UserMenu({ mobile }: { mobile?: boolean }) {
 				<div className="p-1.5 space-y-0.5">
 					<Link
 						className="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-300 dark:focus:bg-neutral-700 dark:focus:text-neutral-300"
-						href={`${apiUrl}/portal/auth/logout?redirect=${encodeURIComponent(
-							homeUrl
-						)}`}
+						href={`${apiUrl}/portal/auth/logout?redirect=${encodeURIComponent(homeUrl)}`}
 						onClick={() => setLoading(true)}
+						role="menuitem"
 					>
 						<LogOut className="shrink-0 size-4" />
 						Logout

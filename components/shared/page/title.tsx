@@ -10,7 +10,7 @@ export default function Title({
 	textColor: TextColorClassName;
 }>) {
 	return (
-		<h1 className={`text-3xl font-bold gap-2 flex items-center ${textColor} ${className}`}>
+		<h1 className={`text-4xl font-bold gap-2 flex items-center ${textColor} ${className}`}>
 			{children}
 		</h1>
 	);
